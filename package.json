@@ -16,5 +16,10 @@
   "bugs": {
     "url": "https://github.com/dingbat-weasel/panopticon/issues"
   },
-  "homepage": "https://github.com/dingbat-weasel/panopticon#readme"
+  "homepage": "https://github.com/dingbat-weasel/panopticon#readme",
+  "dependencies": {
+    "console.table": "^0.10.0",
+    "inquirer": "^8.2.4",
+    "mysql2": "^3.2.0"
+  }
 }
