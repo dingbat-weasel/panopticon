@@ -1,2 +1,11 @@
 INSERT INTO departments (name)
-VALUES ()
+VALUES 
+    ("Idealism"),
+    ("Existentialism"),
+    ("Hermeneutics"),
+    ("Deconstructionism"),
+    ("Structuralism"),
+    ("Post-Structuralism"),
+    ("Phenomenology");
+    
+SELECT * FROM departments;

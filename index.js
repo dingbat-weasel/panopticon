@@ -18,20 +18,24 @@ const db = mysql.createConnection(
   console.log(`Connected to database`)
 );
 
-inquirer.prompt(promptStart).then((response) => {
-  switch (response) {
-    case "View all Departments":
-      db.query("SELECT * FROM departments", function (err, results) {
-        console.log(results);
-      });
-      break;
-    case "View all Roles":
-    case "View all Employees":
-    case "Add a Department":
-    case "Add a Role":
-    case "Add an Employee":
-    case "Update an Employee Role":
-    default:
-      console.log("Sorry there was an error please try again");
-  }
-});
+const beginPrompts = function () {
+  inquirer.prompt(promptStart).then((response) => {
+    switch (response.promptStart) {
+      case "View all Departments":
+        db.query("SELECT * FROM departments", (err, results) => {
+          console.log(results);
+        });
+        break;
+      case "View all Roles":
+      case "View all Employees":
+      case "Add a Department":
+      case "Add a Role":
+      case "Add an Employee":
+      case "Update an Employee Role":
+      default:
+        console.log("Sorry there was an error please try again");
+    }
+
+    beginPrompts();
+  });
+};
