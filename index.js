@@ -12,13 +12,6 @@ const {
 require("dotenv").config();
 require("console.table");
 
-const {
-  promptStart,
-  addDepartmentPrompts,
-  addRolePrompts,
-  addEmployeePrompts,
-} = require("./logic/prompts.js");
-
 const db = mysql.createConnection(
   {
     host: "localhost",
