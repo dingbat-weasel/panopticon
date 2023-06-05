@@ -1,4 +1,4 @@
-export const viewDep = () => {
+const viewDep = () => {
   const sql = "SELECT * FROM department;";
   db.promise()
     .query({ sql, rowsAsArray: true })
@@ -8,7 +8,7 @@ export const viewDep = () => {
     });
 };
 
-export const viewRoles = () => {
+const viewRoles = () => {
   const sql = "SELECT * FROM role;";
   db.promise()
     .query({ sql, rowsAsArray: true })
@@ -18,7 +18,7 @@ export const viewRoles = () => {
     });
 };
 
-export const viewEmps = () => {
+const viewEmps = () => {
   const sql = "SELECT * FROM employee;";
   db.promise()
     .query({ sql, rowsAsArray: true })
@@ -28,7 +28,7 @@ export const viewEmps = () => {
     });
 };
 
-export const addDep = () => {
+const addDep = () => {
   inquirer
     .prompt([
       {
@@ -45,7 +45,8 @@ export const addDep = () => {
         .catch((err) => console.error(err));
     });
 };
-export const addRole = () => {
+
+const addRole = () => {
   inquirer
     .prompt([
       {
@@ -73,5 +74,70 @@ export const addRole = () => {
         .catch((err) => console.error(err));
     });
 };
-export const addEmp = () => {};
-export const updateEmpRole = () => {};
+const addEmp = () => {
+  inquirer
+    .prompt([
+      {
+        type: "input",
+        name: "addEmpFirst",
+        message: "First Name:",
+      },
+      {
+        type: "input",
+        name: "addEmpLast",
+        message: "Last Name:",
+      },
+      {
+        type: "input",
+        name: "addEmpRole",
+        message: "Role at Company:",
+      },
+      {
+        type: "input",
+        name: "addEmpMngr",
+        message: "Manager:",
+      },
+    ])
+    .then((res) => {
+      const sql = `INSERT INTO employee (first_name, last_name, role_id, manager_id) VALUES
+    ("${res.firstName}","${res.lastName}","${res.roleId}","${res.managerId}");`;
+      db.promise()
+        .query(sql)
+        .then(mainPage())
+        .catch((err) => console.error(err));
+    });
+};
+const updateEmpRole = () => {
+  inquirer
+    .prompt([
+      {
+        name: "employeeId",
+        type: "input",
+        message: "Employee ID to update:",
+      },
+      {
+        name: "roleId",
+        type: "input",
+        message: "Employee Role to update:",
+      },
+    ])
+    .then((res) => {
+      const sql = `UPDATE employees SET roleId = "${res.roleId}"
+        WHERE id = "${res.employeeId}";`;
+
+      db.promise()
+        .query(sql)
+        .then(mainPage())
+        .catch((err) => console.error(err));
+    });
+};
+
+module.exports = {
+  viewDep,
+  viewRoles,
+  viewEmps,
+  addDep,
+  addRole,
+  addEmp,
+  updateEmpRole,
+};
