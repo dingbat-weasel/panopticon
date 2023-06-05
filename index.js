@@ -1,6 +1,17 @@
 const mysql = require("mysql2");
 const inquirer = require("inquirer");
+const {
+  viewDep,
+  viewRoles,
+  viewEmps,
+  addDep,
+  addRole,
+  addEmp,
+  updateEmpRole,
+} = require("./logic/queries");
 require("dotenv").config();
+require("console.table");
+
 const {
   promptStart,
   addDepartmentPrompts,
@@ -22,16 +33,28 @@ const beginPrompts = function () {
   inquirer.prompt(promptStart).then((response) => {
     switch (response.promptStart) {
       case "View all Departments":
-        db.query("SELECT * FROM departments", (err, results) => {
-          console.log(results);
-        });
+        viewDep();
         break;
       case "View all Roles":
+        viewRoles();
+        break;
       case "View all Employees":
+        viewEmps();
+        break;
       case "Add a Department":
+        addDep();
+        break;
       case "Add a Role":
+        addRole();
+        break;
       case "Add an Employee":
+        addEmp();
+        break;
       case "Update an Employee Role":
+        updateEmpRole();
+        break;
+      case "Quit.":
+        break;
       default:
         console.log("Sorry there was an error please try again");
     }

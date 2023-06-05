@@ -11,6 +11,7 @@ const promptStart = [
       "Add a Role",
       "Add an Employee",
       "Update an Employee Role",
+      "Quit.",
     ],
   },
 ];
